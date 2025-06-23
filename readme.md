@@ -10,10 +10,6 @@ Run the following commands to install the required libraries (requests, web3, an
 ```bash
 pip install requests
 pip install web3
-pip install json
-pip install time
-pip install os.path
-pip install re
 pip install python-telegram-bot
 
 ```
@@ -29,7 +25,7 @@ Step 4: Update the script
 Replace the placeholder BOT_TOKEN in the script with the token provided by the BotFather. Also, replace '@yaratoken' with the actual Telegram group ID where you want to send the alert messages. and add the etherscan API key
 
 Step 5: Run the script
-Now, you are ready to run the script.  and execute it:
+Now you are ready to run the script. Execute it with:
 
 ```bash
 
