@@ -124,10 +124,13 @@ def monitor_wallets():
                 watched_tokens = set(f.read().splitlines())
 
             for wallet in watched_wallets:
-                blockchain, wallet_address = wallet.split(':')
-            for token in watched_tokens:
-                blockchain, token_address = token.split(':')
-                transactions = get_wallet_transactions(wallet_address, token_address, blockchain)
+                wallet_blockchain, wallet_address = wallet.split(':')
+                for token in watched_tokens:
+                    token_blockchain, token_address = token.split(':')
+                    if token_blockchain != wallet_blockchain:
+                        continue
+                    blockchain = wallet_blockchain
+                    transactions = get_wallet_transactions(wallet_address, token_address, blockchain)
 
                 for tx in transactions:
                     if blockchain == 'pls':
