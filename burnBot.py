@@ -132,49 +132,49 @@ def monitor_wallets():
                     blockchain = wallet_blockchain
                     transactions = get_wallet_transactions(wallet_address, token_address, blockchain)
 
-                for tx in transactions:
-                    if blockchain == 'pls':
-                        tx_hash = tx['blockHash']
-                    else:
-                        tx_hash = tx['hash']
-                    tx_time = int(tx['timeStamp'])
-                    if blockchain == 'eth':
-                        price = eth_usd_price
-                        token = 'ETH'
-                    elif blockchain == "eth":
-                        price = dai_usd_price
-                        token = 'DAI'
-                    elif blockchain == "eth":
-                        price = link_usd_price
-                        token = 'LINK'
-                    elif blockchain == "eth":
-                        price = usdc_usd_price
-                        token = 'USDC'
-                    elif blockchain == "eth":
-                        price = usdt_usd_price
-                        token = 'USDT'
-                 
-                    elif blockchain == "pls":
-                        price = pls_usd_price
-                        token = 'PLS'
-                 
-                    else:
-                        raise ValueError('Invalid blockchain specified')
-                        
-                    if tx_hash not in latest_tx_hashes and tx_time > last_run_time:
-                        if tx['to'].lower() == wallet_address.lower():
-                            value = float(tx['value']) / 10 ** 18  # Convert from wei to ETH or BNB
-                            usd_value = value * price  # Calculate value in USD
-                            message = f'🚨 Incoming transaction detected on {wallet_address}'
-                            send_telegram_notification(message, value, usd_value, tx['hash'], blockchain,tx['from'],tx['to'], tx['tokenSymbol'])
-                            latest_tx_hashes[tx_hash] = int(tx['blockNumber'])
+                    for tx in transactions:
+                        if blockchain == 'pls':
+                            tx_hash = tx['blockHash']
+                        else:
+                            tx_hash = tx['hash']
+                        tx_time = int(tx['timeStamp'])
+                        if blockchain == 'eth':
+                            price = eth_usd_price
+                            token = 'ETH'
+                        elif blockchain == "eth":
+                            price = dai_usd_price
+                            token = 'DAI'
+                        elif blockchain == "eth":
+                            price = link_usd_price
+                            token = 'LINK'
+                        elif blockchain == "eth":
+                            price = usdc_usd_price
+                            token = 'USDC'
+                        elif blockchain == "eth":
+                            price = usdt_usd_price
+                            token = 'USDT'
 
-                        elif tx['from'].lower() == token_address.lower():
-                            value = float(tx['value']) / 10 ** 18  # Convert from wei to ETH or BNB
-                            usd_value = value * price  # Calculate value in USD
-                            message = f'🚨 Outgoing transaction detected on {token_address}'
-                            send_telegram_notification(message, value, usd_value, tx['hash'], blockchain,tx['from'],tx['to'], tx['tokenSymbol'])
-                            latest_tx_hashes[tx_hash] = int(tx['blockNumber'])
+                        elif blockchain == "pls":
+                            price = pls_usd_price
+                            token = 'PLS'
+
+                        else:
+                            raise ValueError('Invalid blockchain specified')
+
+                        if tx_hash not in latest_tx_hashes and tx_time > last_run_time:
+                            if tx['to'].lower() == wallet_address.lower():
+                                value = float(tx['value']) / 10 ** 18  # Convert from wei to ETH or BNB
+                                usd_value = value * price  # Calculate value in USD
+                                message = f'🚨 Incoming transaction detected on {wallet_address}'
+                                send_telegram_notification(message, value, usd_value, tx['hash'], blockchain,tx['from'],tx['to'], tx['tokenSymbol'])
+                                latest_tx_hashes[tx_hash] = int(tx['blockNumber'])
+
+                            elif tx['from'].lower() == token_address.lower():
+                                value = float(tx['value']) / 10 ** 18  # Convert from wei to ETH or BNB
+                                usd_value = value * price  # Calculate value in USD
+                                message = f'🚨 Outgoing transaction detected on {token_address}'
+                                send_telegram_notification(message, value, usd_value, tx['hash'], blockchain,tx['from'],tx['to'], tx['tokenSymbol'])
+                                latest_tx_hashes[tx_hash] = int(tx['blockNumber'])
 
 
                   
