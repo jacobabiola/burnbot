@@ -1,0 +1,33 @@
+# Core dependencies for blockchain monitoring bot
+requests>=2.25.1
+web3>=6.0.0
+python-telegram-bot>=13.15
+
+# Optional dependencies for advanced features
+aiohttp>=3.8.0          # For async API calls
+flask>=2.0.0            # For web API integration
+sqlite3                 # For database integration (built-in)
+
+# Development and testing dependencies
+unittest2>=1.1.0        # Enhanced unit testing
+pytest>=7.0.0           # Alternative testing framework
+pytest-asyncio>=0.21.0  # For async testing
+pytest-mock>=3.10.0     # Mocking utilities
+
+# Performance and caching
+pickle                  # For caching (built-in)
+asyncio                 # For async operations (built-in)
+
+# Data analysis (optional)
+pandas>=1.3.0           # For data analysis
+matplotlib>=3.5.0       # For plotting burn statistics
+seaborn>=0.11.0         # Enhanced plotting
+
+# Additional utilities
+python-dateutil>=2.8.0  # Date parsing utilities
+pytz>=2021.3            # Timezone handling
+jsonschema>=4.0.0       # JSON validation
+
+# Security (recommended)
+cryptography>=3.4.0     # For secure operations
+certifi>=2021.10.8      # SSL certificate verification
